@@ -1,0 +1,22 @@
+{
+  "name": "2016-01-mvp",
+  "version": "1.0.0",
+  "description": "##Summary Friendly web software to enable marketers to render dynamic web content.  Marketers can setup and deploy w/ minimal engineering involvment.",
+  "main": "/server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vcipriani/2016-01-mvp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vcipriani/2016-01-mvp/issues"
+  },
+  "homepage": "https://github.com/vcipriani/2016-01-mvp#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
