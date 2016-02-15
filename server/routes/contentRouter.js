@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var db = require('../database');
+
 // // middleware that is specific to this router
 // router.use(function timeLog(req, res, next) {
 //   console.log('Time: ', Date.now());
@@ -15,9 +17,22 @@ router.get('/demo', function(req, res) {
                       'document.body.appendChild(div);');
 });
 
-// define the about route
+//Main route that delivers the dynamic content
 router.get('/:id', function(req, res) {
-  res.send(req.params.id);
+  var pageId = req.params.id;
+  //Look up the page
+  db.knex.raw('select id from pages where id=' + pageId)
+  .then(function(pages) {
+    if (pages[0].length === 1) {
+      res.send('found your page')
+    } else {
+      res.send('didnt find');
+    }
+  });
+  //Look up corresponding interactions
+  
+  //Generate and return JS
+  // res.send(req.params.id);
 });
 
 
