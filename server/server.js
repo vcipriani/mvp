@@ -7,22 +7,20 @@ var port = 3000;
 //Initialize database
 var bookshelf = require('./database');
 
+
 //Serve our admin app
 app.use('/app', express.static(path.join(__dirname, '../client')));
 
 //Serve our example customer site.  This would normally be hosted by the customer, not us
 app.use('/cust', express.static(path.join(__dirname, '../customer')));
 
+//Load routers
+var contentRouter = require('./routes/contentRouter');
+
+app.use('/content/', contentRouter);
+
 app.get('/', function(req, res) {
   res.send('hello world');
-});
-
-//A sample endpoint which would contain the logic required to render the content specified by the customer
-app.get('/content/1', function(req, res) {
-  res.send('var div = document.createElement(\'div\'); ' +
-                      'var text = document.createTextNode(\'Hello World\'); ' +
-                      'div.appendChild(text); ' +
-                      'document.body.appendChild(div);');
 });
 
 app.listen(port, function () {
