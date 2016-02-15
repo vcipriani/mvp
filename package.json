@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/vcipriani/2016-01-mvp#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "bookshelf": "^0.9.1",
+    "express": "^4.13.4",
+    "knex": "^0.10.0",
+    "mysql": "^2.10.2"
   }
 }

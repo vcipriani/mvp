@@ -4,6 +4,9 @@ var path = require('path');
 
 var port = 3000;
 
+//Initialize database
+var bookshelf = require('./database');
+
 //Serve our admin app
 app.use('/app', express.static(path.join(__dirname, '../client')));
 
