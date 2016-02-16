@@ -1,5 +1,18 @@
 <div>
  <h3>Manage {{data.page.title}}</h3>
+ <h4>{{data.page.views}} views</h4>
+ <table class="pure-table">
+    <thead>
+        <tr>
+            <th>Script Tag: Insert on your page</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>http://localhost:3000/content/{{data.page.id}}</td>
+      </tr>
+    </tbody>
+  </table>
  <h4>Current Interactions</h4>
  <table class="pure-table">
     <thead>
@@ -37,23 +50,16 @@
         <td>{{interaction.description}}</td>
         <td ng-bind-html="interaction.html_content_a | sanitize"> </td>
         <td ng-bind-html="interaction.html_content_b | sanitize"> </td>
-        <td><a href="" ng-click="addInteraction(interaction.id, '#target2')">Add</a></td>
+        <td>
+          <a ng-show="!showTarget" href="" ng-click="showTarget=true;">Add</a>
+          <div ng-show="showTarget" >
+            <input type="text" ng-model="targetSelector"/>
+            <a href="" ng-click="showTarget = false; addInteraction(interaction.id, targetSelector); targetSelector='';">Confirm</a>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
   <br><br>
-  <table class="pure-table">
-    <thead>
-        <tr>
-            <th>Script Tag: Insert on your page</th>
-        </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>http://localhost:3000/content/{{data.page.id}}</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
+ 
 </div>

@@ -23,6 +23,9 @@ app.use('/content/', contentRouter);
 var apiRouter = require('./routes/apiRouter.js');
 app.use('/api', apiRouter);
 
+var trafficRouter = require('./routes/trafficRouter.js');
+app.use('/traffic', apiRouter);
+
 //Dev only nodeserver - should remove and run as separate project
 var nodeadmin = require('nodeadmin');
 app.use(nodeadmin(app));

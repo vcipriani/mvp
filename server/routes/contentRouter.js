@@ -3,12 +3,7 @@ var router = express.Router();
 var Promise = require('bluebird');
 
 var db = require('../database');
-
-// // middleware that is specific to this router
-// router.use(function timeLog(req, res, next) {
-//   console.log('Time: ', Date.now());
-//   next();
-// });
+var traffic = require('../models/traffic');
 
 //Main route that delivers the dynamic content
 router.get ('/:id', function(req, res) {
@@ -27,6 +22,12 @@ router.get ('/:id', function(req, res) {
         return interactionProcessor(interaction.interaction_id, interaction.interaction_type_id, 
         interaction.target_selector);
       });
+
+      //Increase our page views.  this is async and we don't wait.
+      traffic.increasePageViews(pageId)
+        .then(function(result) {
+          console.log('update should have happened');
+        });
       
       //Wait for all interactions to be processed and return the javascript to the client
       Promise.all(allJavascript).then(function(results) {
