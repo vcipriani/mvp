@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Promise = require('bluebird');
 
+var db = require('../database');
+
 var Interaction = require('../models/Interaction');
 
 router.route('/ab/:idInteraction')
@@ -34,6 +36,14 @@ router.route('/ab')
     });
   });
  
+router.route('/pages/:id')
+  .get(function(req, res) {
+    db.knex.raw(`select * from pages where id=${req.params.id};`)
+      .then(function(response) {
+        res.json(response[0][0]);
+      });
+  });
+   
 router.route('/interactions')
   .get(function(req, res) {
     Interaction.getAllInteractions()

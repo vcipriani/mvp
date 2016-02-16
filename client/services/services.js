@@ -41,12 +41,12 @@ angular.module('mvpApp.services', [])
   };
 })
 .factory('Pages', function($http){
-  var getPageInfo = function() {
-    return {
-      id: 1,
-      title: 'Main Page'
-    };
+  var getPageInfo = function(pageId) {
+    return $http({
+      method: 'GET',
+      url: '/api/pages/' + pageId 
+    });
   };
   
   return {getPageInfo: getPageInfo};
-})
+});
