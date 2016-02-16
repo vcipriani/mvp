@@ -1,13 +1,8 @@
-angular.module('mvpApp.pages', [])
-  .controller('PageController', function ($scope) {
+angular.module('mvpApp.pages', ['mvpApp.services'])
+  .controller('PageController', function ($scope, Interactions) {
     // When user adds a new link, put it in the collection
     $scope.data = {};
-    $scope.data.interactions = [
-      {
-        title: 'title1',
-        description: 'description2',
-        targetSelector: '.target'
-      }
-    ];
+    $scope.data.interactions = Interactions.getActiveInteractions();
+    $scope.data.availableInteractions =  Interactions.getAllInteractions();
    
   });

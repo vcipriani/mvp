@@ -1,6 +1,8 @@
 var angular = require('angular');
+
+//Angular moduels attach to the global angular variable
+require('./services/services');
 require('./controllers/pageController');
-// var ui-router = require('angular-ui-router');
 require('angular-route');
 
 angular.module('mvpApp', ['ngRoute', 'mvpApp.pages'])
