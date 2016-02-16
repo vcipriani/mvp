@@ -1,5 +1,5 @@
 <div>
- <h3>Manage Page</h3>
+ <h3>Manage {{data.page.title}}</h3>
  <h4>Current Interactions</h4>
  <table class="pure-table">
     <thead>
@@ -14,7 +14,7 @@
       <tr ng-repeat="interaction in data.interactions">
         <td>{{interaction.title}}</td>
         <td>{{interaction.description}}</td>
-        <td>{{interaction.targetSelector}}</td>
+        <td>{{interaction.target_selector}}</td>
         <td><a href="">Remove</a></td>
       </tr>
     </tbody>
@@ -41,4 +41,19 @@
       </tr>
     </tbody>
   </table>
+  <br><br>
+  <table class="pure-table">
+    <thead>
+        <tr>
+            <th>Script Tag: Insert on your page</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>http://localhost:3000/content/{{data.page.id}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
 </div>

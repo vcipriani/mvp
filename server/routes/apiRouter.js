@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Promise = require('bluebird');
 
-var db = require('../database');
+var Interaction = require('../models/Interaction');
 
 router.route('/ab/:idInteraction')
   .get(function(req, res) {
@@ -32,6 +32,14 @@ router.route('/ab')
     .then(function(results) {
       res.json(results[0]);
     });
+  });
+  
+router.route('/interactions/active')
+  .get(function(req,res) {
+    Interaction.getActiveInteractions()
+      .then(function(results) {
+        res.json(results);
+      });
   });
   
 module.exports = router;

@@ -2,13 +2,10 @@ angular.module('mvpApp.services', [])
 
 .factory('Interactions', function ($http) {
   var getActiveInteractions = function() {
-    return [
-      {
-        title: 'title1',
-        description: 'description2',
-        targetSelector: '.target'
-      }
-    ];
+    return $http({
+      method: 'GET',
+      url: '/api/interactions/active'
+    });
   };
 
   var getAllInteractions = function() {
@@ -28,9 +25,18 @@ angular.module('mvpApp.services', [])
     ];
   };
 
-
   return {
     getActiveInteractions: getActiveInteractions,
     getAllInteractions: getAllInteractions
   };
+})
+.factory('Pages', function($http){
+  var getPageInfo = function() {
+    return {
+      id: 1,
+      title: 'Main Page'
+    };
+  };
+  
+  return {getPageInfo: getPageInfo};
 })
