@@ -4,6 +4,8 @@
   "description": "##Summary Friendly web software to enable marketers to render dynamic web content.  Marketers can setup and deploy w/ minimal engineering involvment.",
   "main": "/server/server.js",
   "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --devtool source-map --progress --colors --hot --content-base client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,12 +19,19 @@
   },
   "homepage": "https://github.com/vcipriani/2016-01-mvp#readme",
   "dependencies": {
+    "angular": "^1.5.0",
     "bookshelf": "^0.9.1",
     "express": "^4.13.4",
-    "knex": "^0.10.0",
+    "knex": "<0.10.0",
     "mysql": "^2.10.2"
   },
   "devDependencies": {
-    "nodeadmin": "^0.1.1"
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.5.0",
+    "eslint": "^2.1.0",
+    "nodeadmin": "^0.1.1",
+    "webpack": "^1.12.13",
+    "webpack-dev-server": "^1.14.1"
   }
 }
