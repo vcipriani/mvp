@@ -1,18 +1,20 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-
+var bodyParser = require('body-parser');
 var port = 3000;
 
 //Initialize database
 var bookshelf = require('./database');
-
 
 //Serve our admin app
 app.use('/app', express.static(path.join(__dirname, '../client')));
 
 //Serve our example customer site.  This would normally be hosted by the customer, not us
 app.use('/cust', express.static(path.join(__dirname, '../customer')));
+
+//Load middleware
+app.use(bodyParser.json());
 
 //Load routers
 var contentRouter = require('./routes/contentRouter');
