@@ -40,4 +40,4 @@ typings/
 
 #Compiled JS
 client/bundle.js
-clinet/bundle.js.map
+client/bundle.js.map
