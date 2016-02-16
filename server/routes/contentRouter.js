@@ -10,14 +10,6 @@ var db = require('../database');
 //   next();
 // });
 
-//A sample endpoint which would contain the logic required to render the content specified by the customer
-router.get('/demo', function(req, res) {
-  res.send('var div = document.createElement(\'div\'); ' +
-                      'var text = document.createTextNode(\'Hello World\'); ' +
-                      'div.appendChild(text); ' +
-                      'document.body.appendChild(div);');
-});
-
 //Main route that delivers the dynamic content
 router.get ('/:id', function(req, res) {
   var pageId = req.params.id;
