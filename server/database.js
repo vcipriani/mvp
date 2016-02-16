@@ -20,6 +20,7 @@ bookshelf.knex.schema.hasTable('pages').then(function(exists) {
       page.increments('id').primary();
       page.string('title', 255);
       page.integer('customer');
+      page.integer('views');
       page.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
