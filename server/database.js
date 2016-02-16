@@ -61,7 +61,7 @@ bookshelf.knex.schema.hasTable('rel_page_interaction').then(function(exists) {
       rel.increments('id').primary();
       rel.integer('interaction_id');
       rel.integer('page_id');
-      rel.string('targetSelector',300);
+      rel.string('target_selector',300);
       rel.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
@@ -76,7 +76,7 @@ bookshelf.knex.schema.hasTable('ab_testing_iterations').then(function(exists) {
       ab.integer('interaction_id');
       ab.integer('iteration_id');
       ab.string('iteration_description',300);
-      ab.string('htmlContent', 10000);
+      ab.string('html_content', 10000);
       ab.integer('hits');
       ab.timestamps();
     }).then(function (table) {
