@@ -5,7 +5,11 @@ angular.module('mvpApp.pages', ['mvpApp.services'])
     
     updateActiveInteractions();
     $scope.data.page = Pages.getPageInfo();
-    $scope.data.availableInteractions =  Interactions.getAllInteractions();
+    
+    Interactions.getAllInteractions()
+      .then(function(results) {
+        $scope.data.availableInteractions =  results.data;
+      });
     
     $scope.addInteraction = function(interactionId, targetSelector) {
       Interactions.addInteractionToPage($scope.data.page.id, interactionId, targetSelector)

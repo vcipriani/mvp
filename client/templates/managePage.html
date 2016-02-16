@@ -35,8 +35,8 @@
       <tr ng-repeat="interaction in data.availableInteractions">
         <td>{{interaction.title}}</td>
         <td>{{interaction.description}}</td>
-        <td ng-bind-html="interaction.iterations[0].htmlContent | sanitize"> </td>
-        <td ng-bind-html="interaction.iterations[1].htmlContent | sanitize"> </td>
+        <td ng-bind-html="interaction.html_content_a | sanitize"> </td>
+        <td ng-bind-html="interaction.html_content_b | sanitize"> </td>
         <td><a href="" ng-click="addInteraction(interaction.id, '#target2')">Add</a></td>
       </tr>
     </tbody>

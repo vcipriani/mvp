@@ -9,21 +9,10 @@ angular.module('mvpApp.services', [])
   };
 
   var getAllInteractions = function() {
-    return [
-      {
-        title: 'title1',
-        id: 1,
-        description: 'description2',
-        iterations: [
-          {iterationDescription: 'Good offer',
-          htmlContent: '<h1>Good News!</h1>'
-          },
-          {iterationDescription: 'Bad offer',
-          htmlContent: '<h1>Bad News!</h1>'
-          }
-        ]
-      }
-    ];
+    return $http({
+      method: 'GET',
+      url: '/api/interactions'
+    });
   };
 
   var addInteractionToPage = function(pageId, interactionId, targetSelector) {

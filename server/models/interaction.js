@@ -1,4 +1,5 @@
 var db = require('../database');
+var Promise = require('bluebird');
 
 var Interaction = {};
 
@@ -29,9 +30,40 @@ Interaction.getActiveInteractions = function() {
     });  
 };
 
-Interaction.getAllABInteractions = function() {
-  
+Interaction.getAllInteractions = function() {
+  var sql = `select id,
+              title,
+              description,
+              html_content_a,
+              html_content_B
+              from interactions i
+              left join (select interaction_id, html_content as html_content_a
+                        from ab_testing_iterations
+                        where iteration_id=0) a on a.interaction_id=i.id
+              left join (select interaction_id, html_content as html_content_b
+                        from ab_testing_iterations
+                        where iteration_id=1) b on b.interaction_id=i.id`;
+  return db.knex.raw(sql)
+    .then(function(result) {
+      return result[0];
+    });
 };
+
+// Interaction.getAllABInteractions = function() {
+//   var allInteractions = Interaction.getAllInteractions();
+//   var allABIteractions = Interaction._getABIterations();
+  
+//   return Promise.all([allInteractions, allABIteractions])
+//     .then(function(results) {
+//       var interactions = results[0];
+//       var abTests = results[1];
+      
+//       interactions.forEach(function(interaction) {
+//         interaction.
+//       });
+//     });
+// };
+
 
 Interaction.addInteractionToPage = function(pageId, interactionId, targetSelector) {
   var sql = `insert into rel_page_interaction (page_id, interaction_id, target_selector)

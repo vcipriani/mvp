@@ -33,7 +33,15 @@ router.route('/ab')
       res.json(results[0]);
     });
   });
-  
+ 
+router.route('/interactions')
+  .get(function(req, res) {
+    Interaction.getAllInteractions()
+      .then(function(results) {
+        res.json(results);
+      });
+  });
+ 
 router.route('/interactions/active')
   .get(function(req,res) {
     Interaction.getActiveInteractions()
@@ -46,7 +54,7 @@ router.route('/interactions/active')
       .then(function(result) {
         res.json(result);
       });
-  })
+  });
 
 router.route('/interactions/active/:id')
   .delete(function(req, res) {
