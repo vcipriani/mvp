@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Promise = require('bluebird');
 
 var db = require('../database');
 
@@ -18,23 +19,47 @@ router.get('/demo', function(req, res) {
 });
 
 //Main route that delivers the dynamic content
-router.get('/:id', function(req, res) {
+router.get ('/:id', function(req, res) {
   var pageId = req.params.id;
-  //Look up the page
-  db.knex.raw('select id from pages where id=' + pageId)
-  .then(function(pages) {
-    if (pages[0].length === 1) {
-      res.send('found your page')
+  //Look up the interactions for a given page
+  db.knex.raw ('select pi.interaction_id, i.interaction_type_id ' +
+    'from pages p ' +
+    'inner join rel_page_interaction pi on p.id=pi.page_id ' +
+    'inner join interactions i on i.id=pi.interaction_id ' +
+    'where p.id = ' + pageId +';')
+  .then (function(interactions) {
+    
+    if (interactions[0].length>0) {
+      //Iterate through all iteractions defined for a page
+      var allJavascript = interactions[0].map( function(interaction){
+        return interactionProcessor(interaction.interation_id, interaction.interaction_type_id);
+      });
+      
+      //Wait for all interactions to be processed and return the javascript to the client
+      Promise.all(allJavascript).then(function(results) {
+        results = results.join('\n');
+        res.send(results);
+      });
     } else {
-      res.send('didnt find');
+      res.send('console.log(\'Could not find the ID specified\')');
     }
   });
-  //Look up corresponding interactions
-  
-  //Generate and return JS
-  // res.send(req.params.id);
 });
 
+//Returns a promise which will resolve to the js code we should send to the client
+var interactionProcessor = function (interactionId, interactionTypeId) {
+  //A/B Test Handling
+  if (interactionTypeId === 1) {
+    //Randomly choose A or B
+    
+    //Pull HTML content for iteration
+    
+    //Generate JS that appends HTML to the target selector
+  }
+  
+  //Default case - ie. we can't figure out how to process the interaction
+  return 'console.log(\'Unknown interaction_type_id=' + interactionTypeId + '\');';
+};
 
 
 module.exports = router;

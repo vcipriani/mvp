@@ -21,5 +21,8 @@
     "express": "^4.13.4",
     "knex": "^0.10.0",
     "mysql": "^2.10.2"
+  },
+  "devDependencies": {
+    "nodeadmin": "^0.1.1"
   }
 }
