@@ -6,6 +6,7 @@ require('./controllers/pageController');
 require('angular-route');
 
 angular.module('mvpApp', ['ngRoute', 'mvpApp.pages'])
+  .filter('sanitize',['$sce', function($sce) { return $sce.trustAsHtml; }])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/managePage', {
@@ -16,3 +17,4 @@ angular.module('mvpApp', ['ngRoute', 'mvpApp.pages'])
         redirectTo: '/managePage'
       });
   });
+ 

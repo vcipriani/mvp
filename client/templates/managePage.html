@@ -26,7 +26,8 @@
         <tr>
             <th>Title</th>
             <th>Description</th>
-            <th>Target Selector</th>
+            <th>Test A:</th>
+            <th>Test B:</th>
             <th></th>
         </tr>
     </thead>
@@ -34,8 +35,9 @@
       <tr ng-repeat="interaction in data.availableInteractions">
         <td>{{interaction.title}}</td>
         <td>{{interaction.description}}</td>
-        <td>{{interaction.iterations[0].htmlContent}}</td>
-        <td><a href="">Remove</a></td>
+        <td ng-bind-html="interaction.iterations[0].htmlContent | sanitize"> </td>
+        <td ng-bind-html="interaction.iterations[1].htmlContent | sanitize"> </td>
+        <td><a href="">Add</a></td>
       </tr>
     </tbody>
   </table>
