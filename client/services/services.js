@@ -12,6 +12,7 @@ angular.module('mvpApp.services', [])
     return [
       {
         title: 'title1',
+        id: 1,
         description: 'description2',
         iterations: [
           {iterationDescription: 'Good offer',
@@ -25,9 +26,29 @@ angular.module('mvpApp.services', [])
     ];
   };
 
+  var addInteractionToPage = function(pageId, interactionId, targetSelector) {
+    return $http({
+      method: 'POST',
+      url: '/api/interactions/active',
+      data: {pageId: pageId,
+        interactionId: interactionId,
+        targetSelector: targetSelector 
+      }
+    });
+  };
+  
+  var removeInteractionFromPage = function(interactionInstanceId) {
+    return $http({
+      method: 'DELETE',
+      url: '/api/interactions/active/' + interactionInstanceId
+    });
+  };
+  
   return {
     getActiveInteractions: getActiveInteractions,
-    getAllInteractions: getAllInteractions
+    getAllInteractions: getAllInteractions,
+    addInteractionToPage: addInteractionToPage,
+    removeInteractionFromPage: removeInteractionFromPage
   };
 })
 .factory('Pages', function($http){

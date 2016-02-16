@@ -17,7 +17,8 @@ Interaction._getABIterations = function() {
 };
 
 Interaction.getActiveInteractions = function() {
-  return db.knex.raw(`select interaction_id,
+  return db.knex.raw(`select pi.id, 
+                     interaction_id,
                      title,
                      description,
                      target_selector
@@ -30,6 +31,21 @@ Interaction.getActiveInteractions = function() {
 
 Interaction.getAllABInteractions = function() {
   
+};
+
+Interaction.addInteractionToPage = function(pageId, interactionId, targetSelector) {
+  var sql = `insert into rel_page_interaction (page_id, interaction_id, target_selector)
+                       values (${pageId}, ${interactionId}, '${targetSelector}');`;
+  return db.knex.raw(sql)
+          .then(function(result){
+            return result;
+          });
+};
+
+Interaction.removeInteractionFromPage = function(instanceId) {
+  var sql = `delete from rel_page_interaction where id=${instanceId};`;
+  
+  return db.knex.raw(sql);
 };
 
 module.exports = Interaction;

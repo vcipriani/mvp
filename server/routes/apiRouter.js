@@ -40,6 +40,20 @@ router.route('/interactions/active')
       .then(function(results) {
         res.json(results);
       });
+  })
+  .post(function(req, res) {
+    Interaction.addInteractionToPage(req.body.pageId, req.body.interactionId, req.body.targetSelector)
+      .then(function(result) {
+        res.json(result);
+      });
+  })
+
+router.route('/interactions/active/:id')
+  .delete(function(req, res) {
+    Interaction.removeInteractionFromPage(req.params.id)
+      .then(function(result) {
+        res.send('success');
+      });
   });
-  
+
 module.exports = router;
