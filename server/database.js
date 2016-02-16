@@ -79,6 +79,7 @@ bookshelf.knex.schema.hasTable('ab_testing_iterations').then(function(exists) {
       ab.string('iteration_description',300);
       ab.string('html_content', 10000);
       ab.integer('hits');
+      ab.integer('views');
       ab.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);

@@ -29,7 +29,8 @@ router.route('/ab')
               iteration_id,
               iteration_description,
               html_content,
-              hits
+              hits,
+              views
               from ab_testing_iterations`)
     .then(function(results) {
       res.json(results[0]);

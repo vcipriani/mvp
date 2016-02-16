@@ -56,6 +56,12 @@ var interactionProcessor = function (interactionId, interactionTypeId, targetSel
         .then(function(resultSet) {
           var htmlContent = resultSet[0][0].html_content;
           var abId = resultSet[0][0].id;
+
+          traffic.increaseABIterationViews(abId)
+            .then(function(result){
+              //do nothing
+            });
+            
           return appendAndWrap(htmlContent, abId, targetSelector);
         });
         
@@ -72,7 +78,7 @@ var appendAndWrap = function(htmlContent, abId, targetSelector) {
   var clickTrackingJs = `$('a').on('click', function(e) {
         $.ajax({
           type: 'POST',
-          url:'http://localhost:3000/traffic/ab/${abId}',
+          url:'http://localhost:3000/traffic/ab/hit/${abId}',
         });
       });`;
       

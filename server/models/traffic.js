@@ -12,4 +12,9 @@ traffic.increaseABIterationHits = function(id) {
   return db.knex.raw(sql);
 };
 
+traffic.increaseABIterationViews = function(id) {
+  sql = `update ab_testing_iterations set views = views + 1 where id=${id};`;
+  return db.knex.raw(sql);
+};
+
 module.exports = traffic;

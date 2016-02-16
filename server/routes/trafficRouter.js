@@ -12,7 +12,7 @@ router.route('/pages/:id')
       });
   });
   
-router.route('/ab/:id')
+router.route('/ab/hit/:id')
   .post(function(req, res) {
     traffic.increaseABIterationHits(req.params.id)
       .then(function(){
