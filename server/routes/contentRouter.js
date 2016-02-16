@@ -62,8 +62,8 @@ var interactionProcessor = function (interactionId, interactionTypeId, targetSel
     return db.knex.raw(sql)
         .then(function(resultSet) {
           var htmlContent = resultSet[0][0].html_content;
-          console.log(htmlContent);
-          return 'console.log(\'it worked!\');';
+          
+          return appendAndWrap(htmlContent, targetSelector);
         });
         
     //Generate JS that appends HTML to the target selector
@@ -73,5 +73,8 @@ var interactionProcessor = function (interactionId, interactionTypeId, targetSel
   return 'console.log(\'Unknown interaction_type_id=' + interactionTypeId + '\');';
 };
 
+var appendAndWrap = function(htmlContent, targetSelector) {
+  return `$(\'${targetSelector}\').append(\'${htmlContent}\')`;
+};
 
 module.exports = router;
