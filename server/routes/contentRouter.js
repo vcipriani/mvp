@@ -26,7 +26,7 @@ router.get ('/:id', function(req, res) {
       //Increase our page views.  this is async and we don't wait.
       traffic.increasePageViews(pageId)
         .then(function(result) {
-          console.log('update should have happened');
+          //Do nothing
         });
       
       //Wait for all interactions to be processed and return the javascript to the client
@@ -48,15 +48,15 @@ var interactionProcessor = function (interactionId, interactionTypeId, targetSel
     var index = Math.floor(Math.random() * 2); //return 0/1;
     
     //Pull HTML content for iteration
-    var sql = 'select html_content from ab_testing_iterations ' +
+    var sql = 'select id, html_content from ab_testing_iterations ' +
         'where interaction_id = ' + interactionId +
         ' and iteration_id = ' + index + ';';
 
     return db.knex.raw(sql)
         .then(function(resultSet) {
           var htmlContent = resultSet[0][0].html_content;
-          
-          return appendAndWrap(htmlContent, targetSelector);
+          var abId = resultSet[0][0].id;
+          return appendAndWrap(htmlContent, abId, targetSelector);
         });
         
     //Generate JS that appends HTML to the target selector
@@ -66,8 +66,17 @@ var interactionProcessor = function (interactionId, interactionTypeId, targetSel
   return 'console.log(\'Unknown interaction_type_id=' + interactionTypeId + '\');';
 };
 
-var appendAndWrap = function(htmlContent, targetSelector) {
-  return `$(\'${targetSelector}\').append(\'${htmlContent}\')`;
+var appendAndWrap = function(htmlContent, abId, targetSelector) {
+  var htmlJs = `$(\'${targetSelector}\').append(\'${htmlContent}\');`;
+  
+  var clickTrackingJs = `$('a').on('click', function(e) {
+        $.ajax({
+          type: 'POST',
+          url:'http://localhost:3000/traffic/ab/${abId}',
+        });
+      });`;
+      
+  return `${htmlJs}\n${clickTrackingJs}`;
 };
 
 module.exports = router;
