@@ -20,6 +20,8 @@
   "homepage": "https://github.com/vcipriani/2016-01-mvp#readme",
   "dependencies": {
     "angular": "^1.5.0",
+    "angular-route": "^1.5.0",
+    "angular-ui-router": "^0.2.18",
     "bookshelf": "^0.9.1",
     "express": "^4.13.4",
     "knex": "<0.10.0",

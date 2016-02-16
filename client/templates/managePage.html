@@ -1,0 +1,22 @@
+<div>
+ <h3>Manage Page</h3>
+ <h4>Current Interactions</h4>
+ <table class="pure-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Target Selector</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="interaction in data.interactions">
+        <td>{{interaction.title}}</td>
+        <td>{{interaction.description}}</td>
+        <td>{{interaction.targetSelector}}</td>
+        <td><a href="">Remove</a>
+      </tr>
+    </tbody>
+</table>
+</div>

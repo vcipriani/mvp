@@ -16,13 +16,14 @@ app.use('/cust', express.static(path.join(__dirname, '../customer')));
 
 //Load routers
 var contentRouter = require('./routes/contentRouter');
-
 app.use('/content/', contentRouter);
+
+var apiRouter = require('./routes/apiRouter.js');
+app.use('/api', apiRouter);
 
 //Dev only nodeserver - should remove and run as separate project
 var nodeadmin = require('nodeadmin');
 app.use(nodeadmin(app));
-
 
 app.get('/', function(req, res) {
   res.send('hello world');
