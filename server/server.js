@@ -20,11 +20,11 @@ app.use(bodyParser.json());
 var contentRouter = require('./routes/contentRouter');
 app.use('/content/', contentRouter);
 
-var apiRouter = require('./routes/apiRouter.js');
+var apiRouter = require('./routes/apiRouter');
 app.use('/api', apiRouter);
 
-var trafficRouter = require('./routes/trafficRouter.js');
-app.use('/traffic', apiRouter);
+var trafficRouter = require('./routes/trafficRouter');
+app.use('/traffic', trafficRouter);
 
 //Dev only nodeserver - should remove and run as separate project
 var nodeadmin = require('nodeadmin');
