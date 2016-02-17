@@ -6,6 +6,11 @@
 .reporting {
   font-size: larger;
 }
+
 .stat {
   font-weight: bold;
 }
+
+form {margin: 10px;}
+
+input {width: 200px;}
