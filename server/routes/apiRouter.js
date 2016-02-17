@@ -44,13 +44,20 @@ router.route('/pages/:id')
         res.json(response[0][0]);
       });
   });
-   
+
+  
 router.route('/interactions')
   .get(function(req, res) {
     Interaction.getAllInteractions()
       .then(function(results) {
         res.json(results);
       });
+  })
+  .post(function(req, res) {
+    Interaction.createInteraction(req.body)
+    .then(function(index){
+      res.send('success');
+    });
   });
  
 router.route('/interactions/active')

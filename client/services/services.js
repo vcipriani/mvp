@@ -33,11 +33,20 @@ angular.module('mvpApp.services', [])
     });
   };
   
+  var createInteraction = function(obj){
+    return $http({
+      method: 'POST',
+      url: '/api/interactions',
+      data: obj
+    });
+  };
+  
   return {
     getActiveInteractions: getActiveInteractions,
     getAllInteractions: getAllInteractions,
     addInteractionToPage: addInteractionToPage,
-    removeInteractionFromPage: removeInteractionFromPage
+    removeInteractionFromPage: removeInteractionFromPage,
+    createInteraction: createInteraction
   };
 })
 .factory('Pages', function($http){

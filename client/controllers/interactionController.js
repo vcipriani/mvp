@@ -1,5 +1,5 @@
 angular.module('mvpApp.interaction', ['mvpApp.services'])
-  .controller('InteractionController', function ($scope, Interactions, Pages) {
+  .controller('InteractionController', function ($scope, $location, Interactions, Pages) {
 
     $scope.data = {};
     $scope.title = 'Example AB Test';
@@ -18,6 +18,10 @@ angular.module('mvpApp.interaction', ['mvpApp.services'])
         descB: $scope.descB,
         htmlB: $scope.htmlB
       };
-      console.log(obj);
+      
+      Interactions.createInteraction(obj)
+        .then(function(){
+          $location.path('/managePage');
+        });
     };
   });

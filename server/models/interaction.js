@@ -57,6 +57,30 @@ Interaction.getAllInteractions = function() {
     });
 };
 
+Interaction.createInteraction = function(obj) {
+  //Create Interaction in interactions
+  // var sql = `insert into interactions (title, description, interaction_type_id, visits)
+  //       values ('${obj.title}', '${obj.description}', 1, 0);`
+  return db.knex('interactions').insert(
+    {title: obj.title, description: obj.description, visits: 0, interaction_type_id: 1}
+    )
+    .then(function(resultArr) {
+      var index = resultArr[0];
+      
+      var aPromise = db.knex('ab_testing_iterations').insert(
+        {interaction_id: index, iteration_id: 0, iteration_description: obj.descA
+        , html_content: obj.htmlA, hits: 0, views: 0 }
+      );
+      
+      var bPromise = db.knex('ab_testing_iterations').insert(
+        {interaction_id: index, iteration_id: 1, iteration_description: obj.descB
+        , html_content: obj.htmlB, hits: 0, views: 0 }
+      );
+      
+      return Promise.all([aPromise, bPromise]);
+    });    
+};
+
 // Interaction.getAllABInteractions = function() {
 //   var allInteractions = Interaction.getAllInteractions();
 //   var allABIteractions = Interaction._getABIterations();
