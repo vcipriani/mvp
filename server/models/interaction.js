@@ -35,12 +35,20 @@ Interaction.getAllInteractions = function() {
               title,
               description,
               html_content_a,
-              html_content_B
+              views_a,
+              hits_a,
+              desc_a,
+              html_content_b,
+              views_b,
+              hits_b,
+              desc_b
               from interactions i
-              left join (select interaction_id, html_content as html_content_a
+              left join (select interaction_id, html_content as html_content_a, 
+                        views as views_a, hits as hits_a, iteration_description as desc_a
                         from ab_testing_iterations
                         where iteration_id=0) a on a.interaction_id=i.id
-              left join (select interaction_id, html_content as html_content_b
+              left join (select interaction_id, html_content as html_content_b,
+                        views as views_b, hits as hits_b, iteration_description as desc_b
                         from ab_testing_iterations
                         where iteration_id=1) b on b.interaction_id=i.id`;
   return db.knex.raw(sql)

@@ -13,6 +13,10 @@ angular.module('mvpApp', ['ngRoute', 'mvpApp.pages'])
         templateUrl: 'templates/managePage.html',
         controller: 'PageController'
       })
+      .when('/reporting', {
+        templateUrl: 'templates/reporting.html',
+        controller: 'PageController'
+      })
       .otherwise({
         redirectTo: '/managePage'
       });

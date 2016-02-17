@@ -1,0 +1,34 @@
+
+<div class="reporting">
+  <h1>Reporting</h1>
+  
+  <span class="stat">Page Visits: </span> {{data.page.views}}
+  <br><br>
+  <span class="stat">Interactions</span>
+  <table class="pure-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>A - Desc.</th>
+            <th>A - Views</th>
+            <th>A - Hits</th>
+            <th>B - Desc.</th>
+            <th>B - Views</th>
+            <th>B - Hits</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="interaction in data.availableInteractions">
+        <td>{{interaction.title}}</td>
+        <td>{{interaction.description}}</td>
+        <td>{{interaction.desc_a}}</td>
+        <td>{{interaction.views_a}}</td>
+        <td>{{interaction.hits_a}}</td>
+        <td>{{interaction.desc_b}}</td>
+        <td>{{interaction.views_b}}</td>
+        <td>{{interaction.hits_b}}</td>    
+      </tr>
+    </tbody>
+  </table>
+</div>

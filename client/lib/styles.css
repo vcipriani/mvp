@@ -2,3 +2,10 @@
 #main {
   margin: 5px;
 }
+
+.reporting {
+  font-size: larger;
+}
+.stat {
+  font-weight: bold;
+}
